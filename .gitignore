@@ -30,3 +30,6 @@ bin/*.o
 *.exe
 *.out
 *.app
+
+# Texts
+*.txt
