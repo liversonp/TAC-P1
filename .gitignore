@@ -1,16 +1,16 @@
 # Prerequisites
-./dep/*.d
+dep/*.d
 
 # Compiled Object files
 *.slo
 *.lo
-./bin/*.o
+bin/*.o
 *.obj
 
 # Precompiled Headers
 *.gch
 *.pch
-    
+
 # Compiled Dynamic libraries
 *.so
 *.dylib
