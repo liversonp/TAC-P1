@@ -64,7 +64,7 @@ Game& Game::GetInstance(){
         return *instance;
     }
 
-    instance = new Game("titulo", 1024, 600);
+    instance = new Game("Liverson Paulo 180022237", 1024, 600);
     return *instance;
 }
 
