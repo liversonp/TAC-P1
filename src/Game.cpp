@@ -3,6 +3,8 @@
 
 #include <string>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "../include/Game.h"
 
 Game* Game::instance = nullptr;
@@ -46,7 +48,9 @@ Game::Game(std::string title, int width, int height){
         std::cout<< SDL_GetError() << std::endl;
         exit(0);
     }
-    
+
+    srand(time(NULL));
+
     state = new State;
 }
 
@@ -78,7 +82,7 @@ SDL_Renderer* Game::GetRenderer(){
 
 void Game::Run(){
     while(!state->QuitRequested()){
-        state->Update();
+        state->Update(0);
         state->Render();
         SDL_RenderPresent(renderer);
         SDL_Delay(33);
