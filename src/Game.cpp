@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <ctime>
 #include "../include/Game.h"
+#include "../include/Resources.h"
 
 Game* Game::instance = nullptr;
 
@@ -87,4 +88,8 @@ void Game::Run(){
         SDL_RenderPresent(renderer);
         SDL_Delay(33);
     }
+    
+    Resources::ClearSounds();
+    Resources::ClearImages();
+    Resources::ClearMusics();
 }
