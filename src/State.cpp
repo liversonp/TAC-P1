@@ -1,12 +1,22 @@
 #include <string>
 #include <iostream>
 #include "../include/State.h"
+#include "../include/TileMap.h"
+#include "../include/TileSet.h"
 
 State::State(){
     quitRequested = false;
-    GameObject* go = new GameObject();
+    
+	GameObject* go = new GameObject();
     go->AddComponent(new Sprite(*go, "./assets/img/ocean.jpg"));
 	objectArray.emplace_back(go);
+	
+	GameObject* tileObject = new GameObject();
+	TileSet* set = new TileSet(64,64, "./assets/img/tileset.png",*tileObject);
+	TileMap* mapa = new TileMap(*tileObject, "./map/tileMap.txt", set);
+	tileObject->AddComponent(mapa);
+	objectArray.emplace_back(tileObject);
+
     LoadAssets();
     music->Play();
 }

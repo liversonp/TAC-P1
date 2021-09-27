@@ -2,6 +2,7 @@
 #include <iostream>
 #include "../include/Sprite.h"
 #include "../include/Game.h"
+#include "../include/Resources.h"
 
 Sprite::Sprite(GameObject& associated):Component(associated){}
 
@@ -10,16 +11,10 @@ Sprite::Sprite(GameObject& associated, std::string file):Component(associated){
     Open(file);
 }
 
-Sprite::~Sprite(){
-    SDL_DestroyTexture(texture);
-}
+Sprite::~Sprite(){}
 
 void Sprite::Open(std::string file){
-    if(texture != nullptr){
-        SDL_DestroyTexture(texture);
-    }
-    Game &game = Game::GetInstance();
-    SDL_Texture* TEXTURE = IMG_LoadTexture(game.GetRenderer(), file.c_str());
+    SDL_Texture* TEXTURE = Resources::GetImage(file);
     if(TEXTURE != nullptr){
         texture = TEXTURE;
     }
@@ -37,10 +32,14 @@ void Sprite::SetClip(int x, int y, int w, int h){
 }
 
 void Sprite::Render(){
+    Render(associated.box.x, associated.box.y);
+}
+
+void Sprite::Render(float x, float y){
     Game& game = Game::GetInstance();
     SDL_Rect dstrect;
-    dstrect.x = associated.box.x;
-    dstrect.y = associated.box.y;
+    dstrect.x = x;
+    dstrect.y = y;
     dstrect.h = clipRect.h;
     dstrect.w = clipRect.w;
     SDL_RenderCopy(game.GetRenderer(), texture, &clipRect, &dstrect);
