@@ -7,6 +7,7 @@
 #include <ctime>
 #include "../include/Game.h"
 #include "../include/Resources.h"
+#include "../include/InputManager.h"
 
 Game* Game::instance = nullptr;
 
@@ -53,6 +54,8 @@ Game::Game(std::string title, int width, int height){
     srand(time(NULL));
 
     state = new State;
+    dt = 0;
+    frameStart = 0;
 }
 
 Game::~Game(){
@@ -82,14 +85,27 @@ SDL_Renderer* Game::GetRenderer(){
 }
 
 void Game::Run(){
+    InputManager& inputManager = InputManager::GetInstance();
     while(!state->QuitRequested()){
-        state->Update(0);
+        CalculateDeltaTime();
+        inputManager.Update();
+        state->Update(dt);
         state->Render();
         SDL_RenderPresent(renderer);
         SDL_Delay(33);
     }
-    
     Resources::ClearSounds();
     Resources::ClearImages();
     Resources::ClearMusics();
+}
+
+void Game::CalculateDeltaTime(){
+    int prevFrame;
+    prevFrame = frameStart;
+    frameStart = SDL_GetTicks();
+    dt = (float)((frameStart - prevFrame)/1000.00);
+}
+
+float Game::GetDeltaTime(){
+    return dt;
 }

@@ -1,5 +1,5 @@
 #ifndef VEC2_H
-#define VEC_H
+#define VEC2_H
 
 #include <iostream>
 #include <cmath>
@@ -15,7 +15,7 @@ public:
     bool HasMagnitude();
     Vec2 operator+(const Vec2 &point);
     Vec2 operator-(const Vec2 &point);
-    Vec2 operator*(int escalar);
+    Vec2 operator*(float escalar);
     float Magnitude();
     void CalcNormalizado();
     float DistPoints(Vec2 p1, Vec2 p2);
