@@ -26,7 +26,7 @@ Vec2 Vec2::operator-(const Vec2 &point){
     return temp;
 }
 
-Vec2 Vec2::operator*(int escalar){
+Vec2 Vec2::operator*(float escalar){
     Vec2 temp;
     temp.x = x * escalar;
     temp.y = y * escalar;
